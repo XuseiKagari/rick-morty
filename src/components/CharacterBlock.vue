@@ -1,7 +1,7 @@
 <template>
     <div class="character-block">
         <div class="character-block__image" 
-            :class="{alive: isAlive, dead: isDead, }">
+            :class="publishedBooksMessage">
             <img :src="character.image" :alt="character.name">
         </div>
         <div class="character-block__info" >
@@ -9,7 +9,7 @@
                 {{character.name}}
             </span>
             <span>
-                {{character.status}} - {{ character.species}}
+                {{character.status}} - {{ character.species}}               
             </span>
             <span>
             Last Know location: {{character.location.name}}
@@ -18,11 +18,12 @@
     
     </div> 
 </template>
-<script>
+<script> 
 export default{
-    data() {
-        return {
-            isAlive: true,
+    computed: {
+        publishedBooksMessage() {
+        return this.character.status == "Alive" ? 'alive' : 
+               this.character.status == "Dead" ? 'dead' : 'unknown'  
         }
     },
     name: 'character-block',
@@ -38,4 +39,5 @@ export default{
         }
     }
 }
+
 </script>
